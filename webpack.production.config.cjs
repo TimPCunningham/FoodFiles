@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require('webpack');
 
 module.exports = {
   mode: "production",
@@ -35,5 +36,14 @@ module.exports = {
         loader: "source-map-loader"
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        "FIREBASE_API_KEY": JSON.stringify(process.env.FIREBASE_API_KEY),
+        "FIREBASE_AUTH_DOMAIN": JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+        "FIREBASE_PROJECT_ID": JSON.stringify(process.env.FIREBASE_PROJECT_ID)
+      }
+    })
+  ]
 };
